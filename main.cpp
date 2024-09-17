@@ -1,44 +1,33 @@
+#include <iostream>
 #include "BrazoRobotico.h"
 
-// Constructor
-BrazoRobotico::BrazoRobotico(double x, double y, double z, bool sujetando)
-    : x(x), y(y), z(z), sujetandoObjeto(sujetando) {}
+int main() {
+    // Crear una instancia del BrazoRobotico en la posición inicial (0, 0, 0)
+    BrazoRobotico brazo;
 
-// Métodos consultores
-double BrazoRobotico::getX() const {
-    return x;
-}
+    // Mostrar la posición inicial
+    std::cout << "Posición inicial del brazo: (" 
+              << brazo.getX() << ", " << brazo.getY() << ", " << brazo.getZ() << ")" << std::endl;
 
-double BrazoRobotico::getY() const {
-    return y;
-}
+    // Mover el brazo a una nueva posición (3.0, 4.0, 5.0)
+    brazo.mover(3.0, 4.0, 5.0);
+    std::cout << "Brazo movido a la nueva posición: (" 
+              << brazo.getX() << ", " << brazo.getY() << ", " << brazo.getZ() << ")" << std::endl;
 
-double BrazoRobotico::getZ() const {
-    return z;
-}
-
-bool BrazoRobotico::estaSujetando() const {
-    return sujetandoObjeto;
-}
-
-// Método para coger un objeto
-void BrazoRobotico::coger() {
-    if (!sujetandoObjeto) {
-        sujetandoObjeto = true;
+    // Comprobar si el brazo está sujetando un objeto
+    if (!brazo.estaSujetando()) {
+        std::cout << "El brazo no está sujetando ningún objeto." << std::endl;
     }
-}
 
-// Método para soltar un objeto
-void BrazoRobotico::soltar() {
-    if (sujetandoObjeto) {
-        sujetandoObjeto = false;
+    // Hacer que el brazo coja un objeto
+    brazo.coger();
+    std::cout << "El brazo ha cogido un objeto." << std::endl;
+
+    // Comprobar de nuevo si el brazo está sujetando un objeto
+    if (brazo.estaSujetando()) {
+        std::cout << "El brazo está sujetando un objeto." << std::endl;
     }
-}
 
-// Método para mover el brazo a una nueva posición
-void BrazoRobotico::mover(double nuevoX, double nuevoY, double nuevoZ) {
-    x = nuevoX;
-    y = nuevoY;
-    z = nuevoZ;
+    return 0;
 }
 
